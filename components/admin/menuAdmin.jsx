@@ -1,4 +1,4 @@
-import { View, Text, Modal, Pressable } from "react-native";
+import { View, Text, Modal, Pressable, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 
@@ -19,9 +19,19 @@ export default function MenuAdmin({ visible, onClose }) {
                     <View className="bg-[#39A900] px-5 pt-14 pb-6">
                         <View className="flex-row justify-between items-center">
                             <View>
-                                <Text className="text-2xl font-extrabold text-white">
-                                    StockMind
-                                </Text>
+                                <View className="flex-row justify-center items-center space-x-2">
+                                    <Image 
+                                    source={require("../../assets/Capa21.png")}
+                                        resizeMode="contain"
+                                        style={{
+                                            width: 30,
+                                            height: 30,
+                                        }}
+                                    />
+                                    <Text className="text-2xl font-extrabold text-white">
+                                        StockMind
+                                    </Text>
+                                </View>
                                 <Text className="text-green-100 mt-1">
                                     Opciones
                                 </Text>

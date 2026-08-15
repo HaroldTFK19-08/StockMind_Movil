@@ -83,6 +83,12 @@ export default function AdminLayout() {
                     href: null,
                 }}
             />
+            <Tabs.Screen
+                name="notificaciones"
+                options={{
+                    href: null,
+                }}
+            />
         </Tabs>
     );
 }
