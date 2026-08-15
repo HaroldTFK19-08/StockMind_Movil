@@ -8,7 +8,6 @@ export default function NotificacionesAdmin() {
         <SafeAreaView className="flex-1">
             <View className="flex-1 bg-[#F4F7F2]">
                 <HeaderAdmin />
-                {/* Encabezado */}
                 <View className="bg-[#39A900] rounded-b-[35px] px-5 pt-6 pb-10">
                     <Text className="text-3xl font-extrabold text-white">
                         Notificaciones

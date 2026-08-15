@@ -74,6 +74,35 @@ export default function MenuAdmin({ visible, onClose }) {
                             />
                         </Pressable>
                     </View>
+                    <View className="px-5 pt-6">
+                        <Pressable
+                            onPress={() =>
+                                navegacion("/admin/usuarios")
+                            }
+                            className="flex-row items-center bg-gray-50 rounded-xl px-4 py-4 mb-3"
+                        >
+                            <View className="w-11 h-11 rounded-xl bg-green-100 items-center justify-center">
+                                <Ionicons
+                                    name="people-outline"
+                                    size={25}
+                                    color="#39A900"
+                                />
+                            </View>
+                            <View className="ml-4 flex-1">
+                                <Text className="text-gray-800 font-bold text-base">
+                                    Usuarios
+                                </Text>
+                                <Text className="text-gray-500 text-sm mt-1">
+                                    Usuarios registrados en StockMind
+                                </Text>
+                            </View>
+                            <Ionicons
+                                name="chevron-forward"
+                                size={20}
+                                color="#9CA3AF"
+                            />
+                        </Pressable>
+                    </View>
                 </View>
                 <Pressable
                     className="flex-1 bg-black/40"
