@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderAdmin from "../../components/admin/header";
 import { useRouter } from "expo-router";
 
-export default function PerfilAdmin() {
+export default function Perfilinstructor() {
     const router = useRouter();
     return (
         <SafeAreaView className="flex-1">
@@ -27,10 +27,10 @@ export default function PerfilAdmin() {
                             </View>
                         </View>
                         <Text className="text-2xl font-extrabold text-white mt-4">
-                            Administrador
+                            Instructor
                         </Text>
                         <Text className="text-green-100 mt-1">
-                            Administrador de StockMind
+                            Instructor de formacion Sena
                         </Text>
                     </View>
                     <View className="mx-5 -mt-5">
@@ -43,7 +43,7 @@ export default function PerfilAdmin() {
                                     Nombre completo
                                 </Text>
                                 <Text className="text-gray-800 font-semibold mt-1">
-                                    Viviana Arias
+                                    Administrador StockMind
                                 </Text>
                             </View>
                             <View className="mt-4">
@@ -51,7 +51,7 @@ export default function PerfilAdmin() {
                                     Correo electrónico
                                 </Text>
                                 <Text className="text-gray-700 mt-1">
-                                    adminsena@sena.edu.co
+                                    administrador@sena.edu.co
                                 </Text>
                             </View>
                             <View className="mt-4">
@@ -60,7 +60,7 @@ export default function PerfilAdmin() {
                                 </Text>
                                 <View className="bg-green-50 self-start px-3 py-1.5 rounded-full mt-1">
                                     <Text className="text-[#39A900] font-semibold">
-                                        Administrador
+                                        Instructor
                                     </Text>
                                 </View>
                             </View>

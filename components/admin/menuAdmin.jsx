@@ -19,7 +19,7 @@ export default function MenuAdmin({ visible, onClose }) {
                     <View className="bg-[#39A900] px-5 pt-14 pb-6">
                         <View className="flex-row justify-between items-center">
                             <View>
-                                <View className="flex-row justify-center items-center space-x-2">
+                                <View className="flex-row justify-center items-center space-x-5">
                                     <Image 
                                     source={require("../../assets/Capa21.png")}
                                         resizeMode="contain"
@@ -32,7 +32,7 @@ export default function MenuAdmin({ visible, onClose }) {
                                         StockMind
                                     </Text>
                                 </View>
-                                <Text className="text-green-100 mt-1">
+                                <Text className="text-green-100 mt-4">
                                     Opciones
                                 </Text>
                             </View>

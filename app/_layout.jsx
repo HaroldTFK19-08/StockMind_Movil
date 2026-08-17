@@ -21,6 +21,18 @@ export default function LayoutApp() {
                     headerShown: false,
                 }}
             />
+            <Stack.Screen
+                name="instructor"
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="cuentaDante"
+                options={{
+                    headerShown: false,
+                }}
+            />
         </Stack>
     );
 }

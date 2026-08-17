@@ -2,8 +2,22 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { useState } from "react";
+
 export default function Login() {
     const router = useRouter();
+    const [correo, setCorreo]=useState("");
+    const [contrasena, setContrasena]=useState("");
+    const IniciarSesion = ()=>{
+        if(correo=="adminsena@soy.sena.edu"&&contrasena=="admin123"){
+            router.push("/admin/home");
+        }else if(correo=="instructorsena@soy.sena.edu"&&contrasena=="instructor124"){
+            router.push("/instructor/home");
+        }
+        else if(correo=="dantesena@soy.sena.edu"&&contrasena=="dante321"){
+            router.push("/cuentaDante/homeDante");
+        }
+    }
     return (
         <SafeAreaView className="flex-1 bg-[#39A900]">
             <View className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#55C52A] opacity-40" />
@@ -23,7 +37,6 @@ export default function Login() {
                     <Text className="text-gray-500 text-center text-sm mt-2 leading-5 mx-5 my-5">
                         Inicia Sesion para el uso del gestor de inventario StockMind
                     </Text>
-                    {/* Campo Correo Electrónico */}
                     <View className="flex-row items-center bg-gray-50 border border-gray-300 rounded-2xl px-4 py-3 mx-5 my-5">
                         <Ionicons name="mail-outline" size={20} color="#6B7280" />
                         <TextInput
@@ -31,10 +44,10 @@ export default function Login() {
                             placeholderTextColor="#9CA3AF"
                             className="flex-1 ml-3 text-gray-800 text-base"
                             autoCapitalize="none"
+                            value={correo}
+                            onChangeText={setCorreo}
                         />
                     </View>
-
-                    {/* Campo Contraseña */}
                     <View className="flex-row items-center bg-gray-50 border border-gray-300 rounded-2xl px-4 py-3 mx-5 my-5">
                         <Ionicons name="lock-closed-outline" size={20} color="#6B7280" />
                         <TextInput
@@ -42,12 +55,14 @@ export default function Login() {
                             placeholderTextColor="#9CA3AF"
                             secureTextEntry
                             className="flex-1 ml-3 text-gray-800 text-base"
+                            value={contrasena}
+                            onChangeText={setContrasena}
                         />
                     </View>
                     <TouchableOpacity
                         activeOpacity={0.8}
                         className="bg-[#39A900] rounded-2xl my-5 mx-5 py-4 flex-row items-center justify-center"
-                        onPress={()=>router.push("/admin/home")}
+                        onPress={IniciarSesion}
                     >
                         <Ionicons name="log-in-outline" size={21} color="white" />
                         <Text className="text-white text-base font-bold ml-2">

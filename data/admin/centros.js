@@ -10,7 +10,7 @@ const Centros = [
     {
         id:"2",
         centro:"CTPI",
-        ubicacion: "Popayan, Centro",
+        ubicacion: "Popayan, Norte",
         direccion:"CLL 3 #53-3",
         sedes:"1",
         ambientes:"20"
@@ -18,7 +18,7 @@ const Centros = [
     {
         id:"3",
         centro:"Centro Agropecuario",
-        ubicacion: "Popayan, Centro",
+        ubicacion: "Popayan, Norte",
         direccion:"CLL 3 #53-3",
         sedes:"2",
         ambientes:"10"

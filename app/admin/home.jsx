@@ -86,36 +86,6 @@ export default function Home(){
                         </View>
                     </View>
                     <View className="px-5 mt-7">
-                        <Text className="text-xl font-bold text-gray-800">
-                            Accesos rápidos
-                        </Text>
-                        <Text className="text-gray-500 mt-1 mb-4">
-                            Gestiona rápidamente tu inventario
-                        </Text>
-                        <Pressable className="bg-white rounded-2xl p-4 flex-row items-center">
-                            <View className="w-12 h-12 bg-green-100 rounded-xl items-center justify-center">
-                                <Ionicons
-                                    name="people-outline"
-                                    size={25}
-                                    color="#39A900"
-                                />
-                            </View>
-                            <View className="flex-1 ml-4">
-                                <Text className="text-base font-bold text-gray-800">
-                                    Usuarios
-                                </Text>
-                                <Text className="text-sm text-gray-500 mt-1">
-                                    Gestionar usuarios del sistema
-                                </Text>
-                            </View>
-                            <Ionicons
-                                name="chevron-forward"
-                                size={20}
-                                color="#9CA3AF"
-                            />
-                        </Pressable>
-                    </View>
-                    <View className="px-5 mt-7">
                         <View className="flex-row justify-between items-center mb-4">
                             <Text className="text-xl font-bold text-gray-800">
                                 Actividad reciente

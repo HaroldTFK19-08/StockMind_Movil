@@ -1,5 +1,6 @@
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
 import HeaderAdmin from "../../components/admin/header";
 import CentrosList from "../../components/admin/listCentros";
 export default function Centros(){
@@ -18,6 +19,13 @@ export default function Centros(){
                 <View className="flex-1 my-5">
                     <CentrosList/>
                 </View>
+                <Pressable className="absolute bottom-6 right-5 w-12 h-12 ml-3 bg-[#39A900] rounded-xl items-center justify-center">
+                    <Ionicons
+                        name="add-circle-outline"
+                        size={30}
+                        color="#FFFFFF"
+                    />
+                </Pressable>
             </View>
         </SafeAreaView>
     )

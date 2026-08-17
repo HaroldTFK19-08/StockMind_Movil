@@ -24,7 +24,7 @@ export default function Elementos(){
                             color="#39A900"
                         />
                         <TextInput
-                            placeholder="Buscar elementos en el Inventario"
+                            placeholder="Buscar elementos"
                             placeholderTextColor="#9CA3AF"
                             className="flex-1 ml-3"
                         />
@@ -34,6 +34,13 @@ export default function Elementos(){
                             name="filter-outline"
                             size={23}
                             color="#39A900"
+                        />
+                    </Pressable>
+                    <Pressable className="w-12 h-12 ml-3 bg-[#39A900] rounded-xl items-center justify-center">
+                        <Ionicons
+                            name="add-circle-outline"
+                            size={30}
+                            color="#FFFFFF"
                         />
                     </Pressable>
                 </View>
