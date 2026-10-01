@@ -48,11 +48,11 @@ export default function SelectField({
 
     return (
         <View className="mb-4">
-            {label ? <Text className="text-[13px] font-semibold text-gray-700 mb-1.5">{label}</Text> : null}
+            {label ? <Text className="text-sm font-semibold text-gray-700 mb-2">{label}</Text> : null}
             <Pressable
                 onPress={() => setOpen((o) => !o)}
                 accessibilityRole="button"
-                className={`h-14 flex-row items-center bg-gray-50 border-[1.5px] rounded-2xl px-4 ${
+                className={`h-14 flex-row items-center bg-white border-[1.5px] rounded-2xl px-4 ${
                     currentError ? "border-red-400" : open ? "border-sena" : "border-gray-200"
                 }`}
             >
@@ -71,7 +71,7 @@ export default function SelectField({
             </Pressable>
 
             {open ? (
-                <View className="mt-2 bg-white border border-gray-200 rounded-2xl overflow-hidden">
+                <View className="mt-2 bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm shadow-slate-900/5">
                     {options.length > 6 ? (
                         <View className="flex-row items-center px-3 h-11 border-b border-gray-100">
                             <Ionicons name="search-outline" size={17} color={COLORS.gray400} />

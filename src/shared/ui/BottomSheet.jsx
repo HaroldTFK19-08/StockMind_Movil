@@ -10,10 +10,10 @@ export default function BottomSheet({ visible, onClose, title, subtitle, icon, c
         <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose} statusBarTranslucent>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : undefined}
-                className="flex-1 justify-end bg-black/45"
+                className="flex-1 justify-end bg-black/50"
             >
                 <Pressable className="absolute inset-0" onPress={onClose} accessibilityLabel="Cerrar" />
-                <View className="bg-white rounded-t-[32px] max-h-[90%]" style={{ paddingBottom: Math.max(insets.bottom, 16) }}>
+                <View className="bg-white rounded-t-[36px] max-h-[92%]" style={{ paddingBottom: Math.max(insets.bottom, 16) }}>
                     <View className="items-center pt-3">
                         <View className="w-10 h-1.5 rounded-full bg-gray-200" />
                     </View>

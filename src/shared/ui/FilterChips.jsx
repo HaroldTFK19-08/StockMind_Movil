@@ -9,7 +9,7 @@ export default function FilterChips({ options = [], value, onChange, allLabel = 
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ paddingHorizontal: 20, gap: 8 }}
-            className="mt-4"
+            className="mt-5"
             style={{ flexGrow: 0 }}
         >
             {items.map((item) => {
@@ -20,7 +20,7 @@ export default function FilterChips({ options = [], value, onChange, allLabel = 
                         onPress={() => onChange(item.value)}
                         accessibilityRole="tab"
                         accessibilityState={{ selected: active }}
-                        className={`px-4 py-2 rounded-full border ${
+                        className={`min-h-10 px-4 py-2 rounded-full border ${
                             active ? "bg-sena border-sena" : "bg-white border-gray-200"
                         }`}
                     >

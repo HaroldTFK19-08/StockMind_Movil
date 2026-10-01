@@ -22,7 +22,7 @@ export default function Button({
 }) {
     const v = VARIANTS[variant] ?? VARIANTS.primary;
     const inactive = disabled || loading;
-    const pad = size === "sm" ? "py-2.5 px-4" : "py-4 px-5";
+    const pad = size === "sm" ? "min-h-11 py-2.5 px-4" : "min-h-14 py-4 px-5";
     return (
         <Pressable
             onPress={onPress}
@@ -30,7 +30,7 @@ export default function Button({
             accessibilityRole="button"
             accessibilityState={{ disabled: inactive, busy: loading }}
             className={`flex-row items-center justify-center rounded-2xl ${pad} ${v.box} ${
-                inactive ? "opacity-60" : "active:opacity-80"
+                inactive ? "opacity-60" : "active:opacity-90"
             } ${className}`}
         >
             {loading ? (

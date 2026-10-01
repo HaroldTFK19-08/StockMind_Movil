@@ -18,7 +18,7 @@ export default function ChipSelect({ label, options = [], value, onChange, formi
 
     return (
         <View className="mb-4">
-            {label ? <Text className="text-[13px] font-semibold text-gray-700 mb-2">{label}</Text> : null}
+            {label ? <Text className="text-sm font-semibold text-gray-700 mb-2">{label}</Text> : null}
             <View className="flex-row flex-wrap gap-2">
                 {options.map((opt) => {
                     const o = typeof opt === "string" ? { label: opt, value: opt } : opt;
@@ -29,7 +29,7 @@ export default function ChipSelect({ label, options = [], value, onChange, formi
                             onPress={() => select(o.value)}
                             accessibilityRole="radio"
                             accessibilityState={{ selected: active }}
-                            className={`px-4 py-2.5 rounded-xl border-[1.5px] ${
+                            className={`min-h-11 px-4 py-2.5 rounded-2xl border-[1.5px] ${
                                 active ? "bg-sena-soft border-sena" : "bg-gray-50 border-gray-200"
                             }`}
                         >

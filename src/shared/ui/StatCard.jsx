@@ -15,7 +15,7 @@ export default function StatCard({ icon, value, label, tone = "green", onPress, 
         <Pressable
             onPress={onPress}
             disabled={!onPress}
-            className="flex-1 bg-white rounded-3xl p-4 active:opacity-80"
+            className="flex-1 bg-white rounded-[28px] border border-white/80 p-4 active:opacity-90"
             style={{ boxShadow: "0px 6px 18px rgba(23, 33, 23, 0.07)" }}
         >
             <View className="flex-row items-center justify-between">
@@ -29,7 +29,7 @@ export default function StatCard({ icon, value, label, tone = "green", onPress, 
             ) : (
                 <Text className="text-[28px] font-extrabold text-ink mt-3">{value ?? "—"}</Text>
             )}
-            <Text className="text-gray-500 text-sm">{label}</Text>
+            <Text className="text-gray-600 text-[13px] font-medium">{label}</Text>
         </Pressable>
     );
 }

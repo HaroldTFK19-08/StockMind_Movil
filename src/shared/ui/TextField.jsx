@@ -32,9 +32,9 @@ export default function TextField({
 
     return (
         <View className="mb-4">
-            {label ? <Text className="text-[13px] font-semibold text-gray-700 mb-1.5">{label}</Text> : null}
+            {label ? <Text className="text-sm font-semibold text-gray-700 mb-2">{label}</Text> : null}
             <View
-                className={`flex-row bg-gray-50 border-[1.5px] rounded-2xl px-4 ${border} ${
+                className={`flex-row bg-white border-[1.5px] rounded-2xl px-4 ${border} ${
                     multiline ? "items-start py-3" : "items-center h-14"
                 }`}
             >
@@ -54,7 +54,7 @@ export default function TextField({
                     secureTextEntry={hidden}
                     multiline={multiline}
                     textAlignVertical={multiline ? "top" : "center"}
-                    className={`flex-1 text-base text-gray-800 ${icon ? "ml-3" : ""} ${multiline ? "min-h-[88px]" : ""}`}
+                    className={`flex-1 text-base text-ink ${icon ? "ml-3" : ""} ${multiline ? "min-h-[88px]" : ""}`}
                     {...inputProps}
                 />
                 {secureTextEntry ? (

@@ -19,7 +19,7 @@ export default function PortalHeader({ showBack = false }) {
 
     return (
         <>
-            <View className="h-16 flex-row items-center justify-between bg-sena px-4">
+            <View className="h-16 flex-row items-center justify-between bg-sena px-5">
                 <View className="flex-row items-center">
                     {showBack ? (
                         <IconButton icon="arrow-back" variant="translucent" size={40} label="Volver" onPress={() => (router.canGoBack() ? router.back() : router.replace(homeOf(user?.rol)))} />

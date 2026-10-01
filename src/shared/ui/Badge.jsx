@@ -14,7 +14,7 @@ export default function Badge({ label, tone }) {
     if (!label) return null;
     const t = TONES[tone ?? statusTone(label)] ?? TONES.neutral;
     return (
-        <View className={`flex-row items-center self-start rounded-full px-2.5 py-1 ${t.box}`}>
+        <View className={`flex-row items-center self-start rounded-full px-3 py-1.5 ${t.box}`}>
             <View className={`w-1.5 h-1.5 rounded-full mr-1.5 ${t.dot}`} />
             <Text className={`text-xs font-semibold ${t.text}`}>{label}</Text>
         </View>

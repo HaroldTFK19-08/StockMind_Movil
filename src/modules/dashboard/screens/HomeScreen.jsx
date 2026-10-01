@@ -12,20 +12,16 @@ import RecentItem from "../components/RecentItem";
 
 const hoy = () =>
     new Date().toLocaleDateString("es-CO", { weekday: "long", day: "numeric", month: "long" });
-
 /** Inicio de cualquier rol; el contenido sale de dashboard.config.js */
 export default function HomeScreen() {
     const router = useRouter();
     const { user } = useAuth();
     const config = HOME_CONFIG[user?.rol];
     const resumen = useResource(() => dashboardService.resumen(user?.rol), [user?.rol]);
-
     if (!config) return null;
-
     // Pares de tarjetas para la grilla 2xN
     const filas = [];
     for (let i = 0; i < config.stats.length; i += 2) filas.push(config.stats.slice(i, i + 2));
-
     return (
         <Screen>
             <PortalHeader />
@@ -43,7 +39,6 @@ export default function HomeScreen() {
                         </Text>
                     </View>
                 </PageHero>
-
                 <View className="px-5 -mt-8 gap-3">
                     {filas.map((fila, i) => (
                         <View key={i} className="flex-row gap-3">
@@ -62,10 +57,8 @@ export default function HomeScreen() {
                         </View>
                     ))}
                 </View>
-
                 {resumen.error ? <ErrorState error={resumen.error} onRetry={resumen.reload} /> : null}
-
-                <View className="px-5 mt-7">
+                <View className="px-5 mt-8">
                     <SectionTitle title="Accesos rápidos" />
                     <View className="gap-3">
                         {config.actions.map((a) => (
@@ -73,9 +66,8 @@ export default function HomeScreen() {
                         ))}
                     </View>
                 </View>
-
                 {resumen.data?.recientes?.length ? (
-                    <View className="px-5 mt-7">
+                    <View className="px-5 mt-8">
                         <SectionTitle title={config.recientes.title} actionLabel="Ver todo" onAction={() => router.push(config.recientes.href)} />
                         <Card className="py-1">
                             {resumen.data.recientes.map((item, idx) => (

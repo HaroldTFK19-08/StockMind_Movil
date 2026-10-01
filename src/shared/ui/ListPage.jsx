@@ -14,7 +14,7 @@ export default function ListPage({ header, title, subtitle, search, filters, chi
             {header}
             <PageHero title={title} subtitle={subtitle} compact />
             {search ? (
-                <View className="px-5 -mt-7">
+                <View className="px-5 -mt-8">
                     <SearchBar {...search} />
                 </View>
             ) : null}

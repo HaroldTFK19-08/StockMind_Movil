@@ -21,7 +21,7 @@ export default function AuthBackground({ children, showBrand = true }) {
                             <Text className="text-green-100 text-sm mt-1">Gestión inteligente de inventario SENA</Text>
                         </View>
                     ) : null}
-                    <View className="bg-white rounded-[32px] px-6 py-7" style={{ boxShadow: "0px 16px 40px rgba(0,0,0,0.18)" }}>
+                    <View className="bg-white rounded-[32px] border border-white/80 px-6 py-7" style={{ boxShadow: "0px 16px 40px rgba(0,0,0,0.18)" }}>
                         {children}
                     </View>
                 </ScrollView>
