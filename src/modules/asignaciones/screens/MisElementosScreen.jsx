@@ -4,6 +4,7 @@ import { ListPage, ResourceList, Button } from "@/shared/ui";
 import PortalHeader from "@/navigation/PortalHeader";
 import ReporteForm from "@/modules/reportes/components/ReporteForm";
 import { asignacionesService } from "../asignaciones.service";
+import { useAsignacionesAnimation } from "../hooks/useAsignacionesAnimation";
 import AsignacionCard from "../components/AsignacionCard";
 import AsignacionDetail from "../components/AsignacionDetail";
 
@@ -15,9 +16,11 @@ export default function MisElementosScreen() {
     const lista = useFilteredList(resource.data, { searchKeys: SEARCH_KEYS, filterKey: "estado" });
     const [detalle, setDetalle] = useState(null);
     const [reportar, setReportar] = useState(null);
+    const animationStyle = useAsignacionesAnimation();
 
     return (
         <ListPage
+            animationStyle={animationStyle}
             header={<PortalHeader />}
             title="Mis elementos"
             subtitle="Elementos que tienes a tu cargo"

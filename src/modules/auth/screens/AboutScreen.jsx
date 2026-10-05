@@ -3,12 +3,14 @@ import Constants from "expo-constants";
 import { Screen, Card, InfoField } from "@/shared/ui";
 import { LOGO_COLOR } from "@/shared/theme";
 import { env } from "@/core";
+import { useAuthAnimation } from "../hooks/useAuthAnimation";
 import PortalHeader from "@/navigation/PortalHeader";
 
 export default function AboutScreen() {
     const version = Constants.expoConfig?.version ?? "1.0.0";
+    const animationStyle = useAuthAnimation();
     return (
-        <Screen>
+        <Screen animationStyle={animationStyle}>
             <PortalHeader showBack />
             <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40 }}>
                 <View className="items-center my-6">

@@ -3,6 +3,7 @@ import { useResource, useFilteredList } from "@/shared/hooks";
 import { ListPage, ResourceList, Button } from "@/shared/ui";
 import PortalHeader from "@/navigation/PortalHeader";
 import { centrosService } from "../centros.service";
+import { useCentrosAnimation } from "../hooks/useCentrosAnimation";
 import CentroCard from "../components/CentroCard";
 import CentroForm from "../components/CentroForm";
 import CentroDetail from "../components/CentroDetail";
@@ -14,9 +15,11 @@ export default function CentrosScreen({ canCreate = true }) {
     const lista = useFilteredList(resource.data, { searchKeys: SEARCH_KEYS });
     const [form, setForm] = useState(false);
     const [detalle, setDetalle] = useState(null);
+    const animationStyle = useCentrosAnimation();
 
     return (
         <ListPage
+            animationStyle={animationStyle}
             header={<PortalHeader />}
             title="Centros"
             subtitle="Centros de formación del SENA Cauca"

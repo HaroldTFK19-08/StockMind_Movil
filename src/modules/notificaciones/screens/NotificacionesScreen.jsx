@@ -4,12 +4,14 @@ import { useResource } from "@/shared/hooks";
 import { Screen, PageHero, ResourceList } from "@/shared/ui";
 import PortalHeader from "@/navigation/PortalHeader";
 import { notificacionesService } from "../notificaciones.service";
+import { useNotificacionesAnimation } from "../hooks/useNotificacionesAnimation";
 import NotificacionItem from "../components/NotificacionItem";
 
 export default function NotificacionesScreen() {
     const resource = useResource(() => notificacionesService.list(), []);
     const lista = resource.data ?? [];
     const sinLeer = useMemo(() => lista.filter((n) => !n.leida).length, [lista]);
+    const animationStyle = useNotificacionesAnimation();
 
     const marcar = async (n) => {
         if (n.leida) return;
@@ -23,7 +25,7 @@ export default function NotificacionesScreen() {
     };
 
     return (
-        <Screen>
+        <Screen animationStyle={animationStyle}>
             <PortalHeader showBack />
             <PageHero
                 title="Notificaciones"

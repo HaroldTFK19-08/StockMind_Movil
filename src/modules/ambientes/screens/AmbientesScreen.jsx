@@ -3,6 +3,7 @@ import { useResource, useFilteredList } from "@/shared/hooks";
 import { ListPage, ResourceList } from "@/shared/ui";
 import PortalHeader from "@/navigation/PortalHeader";
 import { ambientesService } from "../ambientes.service";
+import { useAmbientesAnimation } from "../hooks/useAmbientesAnimation";
 import AmbienteCard from "../components/AmbienteCard";
 import AmbienteDetail from "../components/AmbienteDetail";
 
@@ -12,9 +13,11 @@ export default function AmbientesScreen({ subtitle = "Consulta los ambientes de 
     const resource = useResource(() => ambientesService.list(), []);
     const lista = useFilteredList(resource.data, { searchKeys: SEARCH_KEYS, filterKey: "estado" });
     const [detalle, setDetalle] = useState(null);
+    const animationStyle = useAmbientesAnimation();
 
     return (
         <ListPage
+            animationStyle={animationStyle}
             header={<PortalHeader />}
             title="Ambientes"
             subtitle={subtitle}

@@ -3,6 +3,7 @@ import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Button } from "@/shared/ui";
 import { COLORS } from "@/shared/theme";
+import { useAuthAnimation } from "../hooks/useAuthAnimation";
 import AuthBackground from "../components/AuthBackground";
 
 const BENEFICIOS = [
@@ -13,8 +14,9 @@ const BENEFICIOS = [
 
 export default function WelcomeScreen() {
     const router = useRouter();
+    const animationStyle = useAuthAnimation();
     return (
-        <AuthBackground>
+        <AuthBackground animationStyle={animationStyle}>
             <Text className="text-ink text-2xl font-extrabold text-center">¡Bienvenido!</Text>
             <Text className="text-gray-500 text-center text-[15px] mt-2 leading-5">
                 Gestiona el inventario del SENA de forma rápida, sencilla y segura.

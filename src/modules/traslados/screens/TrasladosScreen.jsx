@@ -5,6 +5,7 @@ import { ListPage, ResourceList, Button, BottomSheet, InfoField, InfoGroup, Badg
 import { formatDate } from "@/shared/utils";
 import PortalHeader from "@/navigation/PortalHeader";
 import { trasladosService } from "../traslados.service";
+import { useTrasladosAnimation } from "../hooks/useTrasladosAnimation";
 import TrasladoCard from "../components/TrasladoCard";
 import TrasladoForm from "../components/TrasladoForm";
 
@@ -18,6 +19,7 @@ export default function TrasladosScreen() {
     const [form, setForm] = useState(false);
     const [detalle, setDetalle] = useState(null);
     const avanzar = useMutation(trasladosService.cambiarEstado);
+    const animationStyle = useTrasladosAnimation();
 
     const siguiente = detalle ? SIGUIENTE[detalle.estado] : null;
 
@@ -34,6 +36,7 @@ export default function TrasladosScreen() {
 
     return (
         <ListPage
+            animationStyle={animationStyle}
             header={<PortalHeader />}
             title="Traslados"
             subtitle="Movimientos de elementos entre ambientes"

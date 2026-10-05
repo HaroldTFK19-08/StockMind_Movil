@@ -3,6 +3,7 @@ import { useResource, useFilteredList, useMutation } from "@/shared/hooks";
 import { ListPage, ResourceList, Button, useToast } from "@/shared/ui";
 import PortalHeader from "@/navigation/PortalHeader";
 import { asignacionesService } from "../asignaciones.service";
+import { useAsignacionesAnimation } from "../hooks/useAsignacionesAnimation";
 import AsignacionCard from "../components/AsignacionCard";
 import AsignacionDetail from "../components/AsignacionDetail";
 import AsignacionForm from "../components/AsignacionForm";
@@ -17,6 +18,7 @@ export default function AsignacionesScreen() {
     const [form, setForm] = useState(false);
     const [detalle, setDetalle] = useState(null);
     const finalizar = useMutation(asignacionesService.finalizar);
+    const animationStyle = useAsignacionesAnimation();
 
     const onFinalizar = async () => {
         try {
@@ -31,6 +33,7 @@ export default function AsignacionesScreen() {
 
     return (
         <ListPage
+            animationStyle={animationStyle}
             header={<PortalHeader />}
             title="Asignaciones"
             subtitle="Asigna elementos a los aprendices y controla su devolución"

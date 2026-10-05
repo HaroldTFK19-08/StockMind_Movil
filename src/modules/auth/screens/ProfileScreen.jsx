@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Screen, Avatar, Badge, Card, InfoField, Button, BottomSheet } from "@/shared/ui";
 import { COLORS } from "@/shared/theme";
 import { env } from "@/core";
+import { useAuthAnimation } from "../hooks/useAuthAnimation";
 import PortalHeader from "@/navigation/PortalHeader";
 import { useAuth } from "../AuthProvider";
 
@@ -28,14 +29,13 @@ export default function ProfileScreen() {
     const { user, logout } = useAuth();
     const [confirmar, setConfirmar] = useState(false);
     const [saliendo, setSaliendo] = useState(false);
-
+    const animationStyle = useAuthAnimation();
     const salir = async () => {
         setSaliendo(true);
         await logout();
     };
-
     return (
-        <Screen>
+        <Screen animationStyle={animationStyle}>
             <PortalHeader showBack />
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 32 }}>
                 <View className="bg-sena rounded-b-[32px] items-center pt-4 pb-14">

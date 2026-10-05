@@ -3,6 +3,7 @@ import { useResource, useFilteredList } from "@/shared/hooks";
 import { ListPage, ResourceList } from "@/shared/ui";
 import PortalHeader from "@/navigation/PortalHeader";
 import { usuariosService } from "../usuarios.service";
+import { useUsuariosAnimation } from "../hooks/useUsuariosAnimation";
 import UsuarioCard from "../components/UsuarioCard";
 import UsuarioDetail from "../components/UsuarioDetail";
 
@@ -12,9 +13,11 @@ export default function UsuariosScreen() {
     const resource = useResource(() => usuariosService.list(), []);
     const lista = useFilteredList(resource.data, { searchKeys: SEARCH_KEYS, filterKey: "rolLabel" });
     const [seleccionado, setSeleccionado] = useState(null);
+    const animationStyle = useUsuariosAnimation();
 
     return (
         <ListPage
+            animationStyle={animationStyle}
             header={<PortalHeader />}
             title="Usuarios"
             subtitle={`${lista.total} personas registradas en StockMind`}

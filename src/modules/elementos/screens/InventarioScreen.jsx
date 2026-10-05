@@ -3,6 +3,7 @@ import { useResource, useFilteredList } from "@/shared/hooks";
 import { ListPage, ResourceList, Button } from "@/shared/ui";
 import PortalHeader from "@/navigation/PortalHeader";
 import { elementosService } from "../elementos.service";
+import { useElementosAnimation } from "../hooks/useElementosAnimation";
 import ElementoCard from "../components/ElementoCard";
 import ElementoDetail from "../components/ElementoDetail";
 import ElementoForm from "../components/ElementoForm";
@@ -15,11 +16,13 @@ export default function InventarioScreen({ canManage = false }) {
     const lista = useFilteredList(resource.data, { searchKeys: SEARCH_KEYS, filterKey: "estado" });
     const [form, setForm] = useState(false);
     const [detalle, setDetalle] = useState(null);
+    const animationStyle = useElementosAnimation();
 
     const reemplazar = (e) => resource.setData((prev) => prev.map((x) => (x.id === e.id ? e : x)));
 
     return (
         <ListPage
+            animationStyle={animationStyle}
             header={<PortalHeader />}
             title="Inventario"
             subtitle={`${lista.total} elementos registrados`}

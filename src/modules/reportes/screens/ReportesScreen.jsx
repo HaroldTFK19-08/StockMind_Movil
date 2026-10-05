@@ -3,6 +3,7 @@ import { useResource, useFilteredList } from "@/shared/hooks";
 import { ListPage, ResourceList, Button } from "@/shared/ui";
 import PortalHeader from "@/navigation/PortalHeader";
 import { reportesService } from "../reportes.service";
+import { useReportesAnimation } from "../hooks/useReportesAnimation";
 import ReporteCard from "../components/ReporteCard";
 import ReporteDetail from "../components/ReporteDetail";
 import ReporteForm from "../components/ReporteForm";
@@ -18,11 +19,13 @@ export default function ReportesScreen({ scope = "mine", elementScope = "all", c
     const lista = useFilteredList(resource.data, { searchKeys: SEARCH_KEYS, filterKey: "estado" });
     const [form, setForm] = useState(false);
     const [detalle, setDetalle] = useState(null);
+    const animationStyle = useReportesAnimation();
 
     const pendientes = (resource.data ?? []).filter((r) => r.estado === "Pendiente").length;
 
     return (
         <ListPage
+            animationStyle={animationStyle}
             header={<PortalHeader />}
             title="Reportes"
             subtitle={

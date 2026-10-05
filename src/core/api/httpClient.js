@@ -44,7 +44,6 @@ async function request(method, path, { body, params, headers, auth = true } = {}
         const token = await tokenStorage.get();
         if (token) finalHeaders.Authorization = `Bearer ${token}`;
     }
-
     let response;
     try {
         response = await fetch(buildUrl(path, params), {

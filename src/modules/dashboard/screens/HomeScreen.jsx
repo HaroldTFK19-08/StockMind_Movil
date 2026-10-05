@@ -8,6 +8,7 @@ import PortalHeader from "@/navigation/PortalHeader";
 import { useAuth } from "@/modules/auth/AuthProvider";
 import { dashboardService } from "../dashboard.service";
 import { HOME_CONFIG } from "../dashboard.config";
+import { useDashboardAnimation } from "../hooks/useDashboardAnimation";
 import RecentItem from "../components/RecentItem";
 
 const hoy = () =>
@@ -18,12 +19,13 @@ export default function HomeScreen() {
     const { user } = useAuth();
     const config = HOME_CONFIG[user?.rol];
     const resumen = useResource(() => dashboardService.resumen(user?.rol), [user?.rol]);
+    const animationStyle = useDashboardAnimation();
     if (!config) return null;
     // Pares de tarjetas para la grilla 2xN
     const filas = [];
     for (let i = 0; i < config.stats.length; i += 2) filas.push(config.stats.slice(i, i + 2));
     return (
-        <Screen>
+        <Screen animationStyle={animationStyle}>
             <PortalHeader />
             <ScrollView
                 showsVerticalScrollIndicator={false}

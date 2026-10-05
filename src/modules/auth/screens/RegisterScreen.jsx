@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { Ionicons } from "@expo/vector-icons";
 import { Button, TextField, ChipSelect, useToast } from "@/shared/ui";
 import { COLORS } from "@/shared/theme";
+import { useAuthAnimation } from "../hooks/useAuthAnimation";
 import AuthBackground from "../components/AuthBackground";
 import { useAuth } from "../AuthProvider";
 import { registerSchema } from "../auth.schemas";
@@ -15,6 +16,7 @@ export default function RegisterScreen() {
     const toast = useToast();
     const { register } = useAuth();
     const [serverError, setServerError] = useState(null);
+    const animationStyle = useAuthAnimation();
 
     const formik = useFormik({
         initialValues: {
@@ -41,7 +43,7 @@ export default function RegisterScreen() {
     });
 
     return (
-        <AuthBackground showBrand={false}>
+        <AuthBackground showBrand={false} animationStyle={animationStyle}>
             <Pressable onPress={() => router.back()} hitSlop={10} className="self-start mb-3" accessibilityLabel="Volver">
                 <Ionicons name="arrow-back" size={24} color={COLORS.gray700} />
             </Pressable>

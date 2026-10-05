@@ -8,9 +8,9 @@ import FilterChips from "./FilterChips";
  * Plantilla de las pantallas de listado:
  * encabezado + banner + buscador flotante + filtros + lista.
  */
-export default function ListPage({ header, title, subtitle, search, filters, children }) {
+export default function ListPage({ header, title, subtitle, search, filters, children, animationStyle }) {
     return (
-        <Screen>
+        <Screen animationStyle={animationStyle}>
             {header}
             <PageHero title={title} subtitle={subtitle} compact />
             {search ? (

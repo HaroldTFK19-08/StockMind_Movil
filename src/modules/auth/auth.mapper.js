@@ -1,6 +1,5 @@
 import { pick, compact } from "@/core";
 import { mapUsuario } from "@/modules/usuarios/usuarios.mapper";
-
 /**
  * Respuesta de POST /auth/login. Se aceptan formas comunes:
  *   { token, user }  |  { access_token, usuario }  |  { data: { token, user } }
@@ -11,7 +10,6 @@ export function mapSession(payload = {}) {
     const userDto = pick(body, "user", "usuario");
     return { token, user: userDto ? mapUsuario(userDto) : null };
 }
-
 /** App → Backend (login). Cambia los nombres aquí si tu API espera otros. */
 export const toLoginDTO = ({ correo, contrasena }) => ({
     correo: correo.trim().toLowerCase(),
