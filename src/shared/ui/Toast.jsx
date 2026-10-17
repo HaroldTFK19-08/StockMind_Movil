@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useRef, useState } from "react";
-import { Animated, Text, View } from "react-native";
+import { Animated, Platform, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -14,6 +14,7 @@ const TIPOS = {
 /** Avisos flotantes que funcionan igual en Android, iOS y web. */
 export function ToastProvider({ children }) {
     const insets = useSafeAreaInsets();
+    const useNativeDriver = Platform.OS !== "web";
     const [toast, setToast] = useState(null);
     const opacity = useRef(new Animated.Value(0)).current;
     const timer = useRef(null);
@@ -22,12 +23,12 @@ export function ToastProvider({ children }) {
         (message, type = "success") => {
             clearTimeout(timer.current);
             setToast({ message, type });
-            Animated.timing(opacity, { toValue: 1, duration: 180, useNativeDriver: true }).start();
+            Animated.timing(opacity, { toValue: 1, duration: 180, useNativeDriver }).start();
             timer.current = setTimeout(() => {
-                Animated.timing(opacity, { toValue: 0, duration: 220, useNativeDriver: true }).start(() => setToast(null));
+                Animated.timing(opacity, { toValue: 0, duration: 220, useNativeDriver }).start(() => setToast(null));
             }, 2600);
         },
-        [opacity]
+        [opacity, useNativeDriver]
     );
 
     const t = toast ? TIPOS[toast.type] ?? TIPOS.info : null;

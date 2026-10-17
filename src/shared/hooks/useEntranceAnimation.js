@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Animated } from "react-native";
+import { Animated, Platform } from "react-native";
 
 export function useEntranceAnimation({ duration = 280, distance = 12 } = {}) {
     const opacity = useRef(new Animated.Value(0)).current;
@@ -10,12 +10,12 @@ export function useEntranceAnimation({ duration = 280, distance = 12 } = {}) {
             Animated.timing(opacity, {
                 toValue: 1,
                 duration,
-                useNativeDriver: true,
+                useNativeDriver: Platform.OS !== "web",
             }),
             Animated.timing(offset, {
                 toValue: 0,
                 duration,
-                useNativeDriver: true,
+                useNativeDriver: Platform.OS !== "web",
             }),
         ]);
 

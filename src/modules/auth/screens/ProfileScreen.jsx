@@ -2,12 +2,29 @@ import { useState } from "react";
 import { View, Text, ScrollView, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { Screen, Avatar, Badge, Card, InfoField, Button, BottomSheet } from "@/shared/ui";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Screen, Avatar, Badge, Card, InfoField, Button, BottomSheet, TextField, useToast } from "@/shared/ui";
+import { useMutation } from "@/shared/hooks";
 import { COLORS } from "@/shared/theme";
 import { env } from "@/core";
 import { useAuthAnimation } from "../hooks/useAuthAnimation";
 import PortalHeader from "@/navigation/PortalHeader";
 import { useAuth } from "../AuthProvider";
+
+const valoresPerfil = (user) => ({
+    nombre: user?.nombre ?? "",
+    correo: user?.correo ?? "",
+    telefono: user?.telefono ?? "",
+});
+
+const perfilSchema = Yup.object({
+    nombre: Yup.string().trim().min(3, "Mínimo 3 caracteres").required("El nombre es obligatorio"),
+    correo: Yup.string().trim().email("Ingresa un correo válido").required("El correo es obligatorio"),
+    telefono: Yup.string()
+        .trim()
+        .matches(/^[\d\s+()-]{7,15}$/, { message: "Teléfono inválido", excludeEmptyString: true }),
+});
 
 function Opcion({ icon, label, description, onPress }) {
     return (
@@ -26,10 +43,42 @@ function Opcion({ icon, label, description, onPress }) {
 
 export default function ProfileScreen() {
     const router = useRouter();
-    const { user, logout } = useAuth();
+    const { user, logout, updateProfile } = useAuth();
+    const toast = useToast();
     const [confirmar, setConfirmar] = useState(false);
     const [saliendo, setSaliendo] = useState(false);
+    const [editando, setEditando] = useState(false);
     const animationStyle = useAuthAnimation();
+    const guardarPerfil = useMutation(updateProfile);
+    const formik = useFormik({
+        initialValues: valoresPerfil(user),
+        enableReinitialize: true,
+        validationSchema: perfilSchema,
+        onSubmit: async (values, helpers) => {
+            const perfil = {
+                nombre: values.nombre.trim(),
+                correo: values.correo.trim().toLowerCase(),
+                telefono: values.telefono.trim(),
+            };
+            try {
+                await guardarPerfil.mutate(perfil);
+                helpers.resetForm({ values: perfil });
+                setEditando(false);
+                toast.show("Perfil actualizado correctamente");
+            } catch (error) {
+                toast.show(error.message, "error");
+            }
+        },
+    });
+    const abrirEditor = () => {
+        formik.resetForm({ values: valoresPerfil(user) });
+        setEditando(true);
+    };
+    const cerrarEditor = () => {
+        if (guardarPerfil.loading) return;
+        formik.resetForm({ values: valoresPerfil(user) });
+        setEditando(false);
+    };
     const salir = async () => {
         setSaliendo(true);
         await logout();
@@ -44,6 +93,14 @@ export default function ProfileScreen() {
                     </View>
                     <Text className="text-2xl font-extrabold text-white mt-4 text-center px-6">{user?.nombre}</Text>
                     <Text className="text-green-100 mt-1">{user?.correo}</Text>
+                    <Pressable
+                        onPress={abrirEditor}
+                        accessibilityRole="button"
+                        className="flex-row items-center mt-4 rounded-xl bg-white px-4 py-2.5 active:opacity-80"
+                    >
+                        <Ionicons name="create-outline" size={18} color={COLORS.primary} />
+                        <Text className="text-sena font-bold ml-2">Editar perfil</Text>
+                    </Pressable>
                 </View>
 
                 <View className="px-5 -mt-8 gap-4">
@@ -56,6 +113,7 @@ export default function ProfileScreen() {
                                 </View>
                             </InfoField>
                             {user?.documento ? <InfoField icon="card-outline" label="Documento" value={user.documento} /> : null}
+                            {user?.telefono ? <InfoField icon="call-outline" label="Teléfono" value={user.telefono} /> : null}
                             {user?.programa ? <InfoField icon="school-outline" label="Programa" value={user.programa} /> : null}
                             {user?.ficha ? <InfoField icon="people-outline" label="Ficha" value={user.ficha} /> : null}
                             {user?.centro ? <InfoField icon="business-outline" label="Centro" value={user.centro} /> : null}
@@ -81,6 +139,40 @@ export default function ProfileScreen() {
                 <Text className="text-gray-600 leading-5 mb-5">Tendrás que ingresar de nuevo con tu correo y contraseña.</Text>
                 <Button title="Sí, cerrar sesión" variant="danger" loading={saliendo} onPress={salir} />
                 <Button title="Cancelar" variant="ghost" className="mt-2" onPress={() => setConfirmar(false)} />
+            </BottomSheet>
+
+            <BottomSheet
+                visible={editando}
+                onClose={cerrarEditor}
+                title="Editar perfil"
+                subtitle="Actualiza tus datos de contacto"
+                icon="person-outline"
+                footer={
+                    <>
+                        <Button title="Guardar cambios" icon="save-outline" loading={guardarPerfil.loading} onPress={formik.handleSubmit} />
+                        <Button title="Cancelar" variant="ghost" className="mt-2" disabled={guardarPerfil.loading} onPress={cerrarEditor} />
+                    </>
+                }
+            >
+                <TextField formik={formik} name="nombre" label="Nombre completo" icon="person-outline" placeholder="Tu nombre" autoComplete="name" />
+                <TextField
+                    formik={formik}
+                    name="correo"
+                    label="Correo electrónico"
+                    icon="mail-outline"
+                    placeholder="usuario@soy.sena.edu"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoComplete="email"
+                />
+                <TextField
+                    formik={formik}
+                    name="telefono"
+                    label="Teléfono (opcional)"
+                    icon="call-outline"
+                    placeholder="Tu número de teléfono"
+                    keyboardType="phone-pad"
+                />
             </BottomSheet>
         </Screen>
     );

@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { env, tokenStorage, userStorage, setUnauthorizedHandler, mockSession, ApiError } from "@/core";
 import { authService } from "./auth.service";
+import { usuariosService } from "@/modules/usuarios/usuarios.service";
 import { ROLES } from "./roles";
 
 const AuthContext = createContext(null);
@@ -87,9 +88,25 @@ export function AuthProvider({ children }) {
         [startSession]
     );
 
+    const updateProfile = useCallback(
+        async (values) => {
+            if (!user?.id) throw new ApiError("No se pudo identificar tu cuenta.");
+            const updated = await usuariosService.update(user.id, values);
+            const returnedFields = Object.fromEntries(
+                Object.entries(updated).filter(([, value]) => value !== undefined)
+            );
+            const nextUser = { ...user, ...returnedFields, ...values };
+            await userStorage.set(nextUser);
+            if (env.useMocks) mockSession.set(nextUser);
+            setUser(nextUser);
+            return nextUser;
+        },
+        [user]
+    );
+
     const value = useMemo(
-        () => ({ status, user, isAuthenticated: Boolean(user), login, register, logout: clearSession }),
-        [status, user, login, register, clearSession]
+        () => ({ status, user, isAuthenticated: Boolean(user), login, register, updateProfile, logout: clearSession }),
+        [status, user, login, register, updateProfile, clearSession]
     );
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

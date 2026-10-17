@@ -1,20 +1,21 @@
 import { useEffect, useRef } from "react";
-import { View, Image, Text, Animated, Easing } from "react-native";
+import { View, Image, Text, Animated, Easing, Platform } from "react-native";
 import { LOGO_BLANCO } from "../theme/assets";
 
 /** Pantalla de carga animada mientras se restaura la sesión. */
 export default function BrandSplash() {
+    const useNativeDriver = Platform.OS !== "web";
     const logo = useRef(new Animated.Value(0)).current;
     const texto = useRef(new Animated.Value(0)).current;
     const barra = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
         Animated.sequence([
-            Animated.timing(logo, { toValue: 1, duration: 650, easing: Easing.out(Easing.back(1.5)), useNativeDriver: true }),
-            Animated.timing(texto, { toValue: 1, duration: 450, easing: Easing.out(Easing.ease), useNativeDriver: true }),
+            Animated.timing(logo, { toValue: 1, duration: 650, easing: Easing.out(Easing.back(1.5)), useNativeDriver }),
+            Animated.timing(texto, { toValue: 1, duration: 450, easing: Easing.out(Easing.ease), useNativeDriver }),
         ]).start();
         Animated.loop(
-            Animated.timing(barra, { toValue: 1, duration: 1100, easing: Easing.inOut(Easing.ease), useNativeDriver: true })
+            Animated.timing(barra, { toValue: 1, duration: 1100, easing: Easing.inOut(Easing.ease), useNativeDriver })
         ).start();
     }, [logo, texto, barra]);
 
